@@ -1,0 +1,6 @@
+[submodule "Magisk"]
+	path = Magisk
+	url = https://github.com/topjohnwu/Magisk
+[submodule "magisk/Magisk"]
+	path = magisk/Magisk
+	url = https://github.com/topjohnwu/Magisk

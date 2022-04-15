@@ -1,0 +1,10 @@
+*.zip
+kernel/*
+!kernel/kenel_build.sh
+!kernel/kernel_clone.sh
+!kernel/kernel_extract.sh
+rom/*
+!rom/rom_download.sh
+aosp/*
+!aosp/clone_aosp.sh
+tools/*

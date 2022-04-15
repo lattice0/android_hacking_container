@@ -12,3 +12,4 @@ emu/*
 !emu/clone_emu.sh
 !emu/emu_build.sh
 !emu/emu_rebuild.sh
+!emu/emu_launch_generic.sh

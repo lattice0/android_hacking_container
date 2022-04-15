@@ -204,6 +204,7 @@ Commands:
  emu_clone               clones android emulator source code
  emu_rebuild             rebuild emulator
  emu_build               build again only changes
+ emu_launch_generic      launches emulator with generic AOSP image built with `m`
 EOF
 }
 
@@ -229,6 +230,12 @@ function emu_rebuild() {
 function emu_build() {
     fail_if_no_device
     (cd $SCRIPT_DIR/devices/$DEVICE/emu; ./emu_build.sh)
+}
+
+# Builds the emulator
+function emu_launch_generic() {
+    fail_if_no_device
+    (cd $SCRIPT_DIR/devices/$DEVICE/emu; ./emu_launch_generic.sh)
 }
 
 # Discovers clang version inside the kernel from the ROM

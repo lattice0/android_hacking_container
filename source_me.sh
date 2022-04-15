@@ -210,13 +210,13 @@ EOF
 # Clones the Android Open Source Project
 function aosp_clone() {
     fail_if_no_device
-    (cd $SCRIPT_DIR/devices/$DEVICE/aosp; ./clone_aosp.sh)
+    (cd $SCRIPT_DIR/devices/$DEVICE/aosp; ./aosp_clone.sh)
 }
 
 # Clones the emulator source code
 function emu_clone() {
     fail_if_no_device
-    (cd $SCRIPT_DIR/devices/$DEVICE/emu; ./clone_emu.sh)
+    (cd $SCRIPT_DIR/devices/$DEVICE/emu; ./emu_clone.sh)
 }
 
 # Rebuilds the emulator

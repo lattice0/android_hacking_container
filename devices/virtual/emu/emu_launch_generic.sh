@@ -1,9 +1,9 @@
 set -ex
 AOSP_ROOT=/home/project/devices/virtual/aosp/a
-DIR_OUT=/home/project/devices/virtual/aosp/a/out/target/product/generic_x86_64
+DIR_OUT=$AOSP_ROOT/out/target/product/generic_x86_64
 mkdir -p $DIR_OUT/data
-ANDROID_PRODUCT_OUT=/home/project/devices/virtual/aosp/a/out/target/product/generic_x86_64 \
-/home/project/devices/virtual/emu/e/external/qemu/objs/emulator \
+ANDROID_PRODUCT_OUT=$AOSP_ROOT/out/target/product/generic_x86_64 \
+/home/project/devices/virtual/emu/e/external/qemu/objs/emulator -verbose \
 -sysdir $DIR_OUT/system \
 -datadir $DIR_OUT/data \
 -kernel $AOSP_ROOT/prebuilts/qemu-kernel/x86_64/5.4/kernel-qemu2 \

@@ -1,6 +1,6 @@
 # Clang, the compiler
 (ANDROID_BRANCH=android-11.0.0_r48 && \
-CLANG_VERSION=clang-r370808b.tar.gz && \
+CLANG_VERSION=clang-r383902.tar.gz && \
 echo "downloading clang for branch $ANDROID_BRANCH and version $CLANG_VERSION..." && \
 rm -rf tools/clang && mkdir -p tools/clang && cd tools/clang && \
 wget -O clang.tar.gz https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/$ANDROID_BRANCH/$CLANG_VERSION -q --show-progress --progress=bar:force 2>&1 && \

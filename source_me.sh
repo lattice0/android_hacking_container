@@ -181,6 +181,7 @@ function h() {
     cat << EOF
 Commands:
  DEVICE=my_device        sets the current device, which makes all commands work on devices/my_device
+ dt			 downloads the toolchain for this device
  kd                      downloads the kernel
  ke                      extracts the kernel
  kb                      builds the kernel

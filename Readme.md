@@ -14,6 +14,8 @@ Inside the container:
 DEVICE=poco_m3
 # Show all commands:
 h
+# Downloads/Installs toolchain for device
+dt
 # Downloads the kernel
 kd
 # Builds the kernel

@@ -62,7 +62,7 @@ function br() {
     fail_if_no_device
     echo "repacking boot.img at $DEVICE"
     (cd $SCRIPT_DIR/devices/$DEVICE/rom/r/boot_img_unpacked && \
-    mkbootimg --kernel "$SCRIPT_DIR/devices/$DEVICE/kernel/k/arch/arm64/boot/Image.gz-dtb" \
+    mkbootimg --kernel "$SCRIPT_DIR/devices/$DEVICE/kernel/k/arch/arm64/boot/Image.gz" \
     --ramdisk boot.img-ramdisk \
     --dtb boot.img-dtb \
     --cmdline "$(< boot.img-cmdline) androidboot.init_fatal_reboot_target=recovery" \

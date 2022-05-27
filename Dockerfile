@@ -12,7 +12,7 @@ RUN apt-get update && \
         libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig libncurses5 rsync \
         nano libssl-dev bc python2 cpio device-tree-compiler openjdk-8-jdk \
         python-is-python3 abootimg brotli usbutils python3-setuptools libarchive-tools \
-        qemu-kvm ninja-build python3-pip ccache && \
+        qemu-kvm ninja-build python3-pip ccache language-pack-ru && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Some precompiled tools like adb

@@ -5,6 +5,7 @@ kernel/*
 !kernel/kernel_extract.sh
 rom/*
 !rom/rom_download.sh
+!rom/magisk/readme.md
 aosp/*
 !aosp/clone_aosp.sh
 tools/*

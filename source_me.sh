@@ -18,7 +18,7 @@ function dt() {
 # Kernel Download
 function kd() {
     fail_if_no_device
-    (cd $SCRIPT_DIR/devices/$DEVICE/kernel; ./kernel_clone.sh)
+    (cd $SCRIPT_DIR/devices/$DEVICE/kernel; ./kernel_download.sh)
 }
 
 # Kernel Clone
@@ -53,8 +53,17 @@ function re() {
 function be() {
     fail_if_no_device
     echo "extracting boot.img at $DEVICE"
-    (cd $SCRIPT_DIR/devices/$DEVICE/rom/r &&  rm -rf boot_img_unpacked && 
+    (cd $SCRIPT_DIR/devices/$DEVICE/rom/r && rm -rf boot_img_unpacked && 
     mkdir boot_img_unpacked && unpackbootimg -i boot.img -o boot_img_unpacked)
+}
+
+# Magisk boot.img extract, so we can repack with custom kernel + root
+function mbe() {
+    fail_if_no_device
+    MAGISK_FILE=$SCRIPT_DIR/devices/$DEVICE/rom/magisk/boot.img
+    echo "extracting magisk_boot.img at $DEVICE"
+    (cd $SCRIPT_DIR/devices/$DEVICE/rom/r && rm -rf boot_img_unpacked && 
+    mkdir boot_img_unpacked && unpackbootimg -i $MAGISK_FILE -o boot_img_unpacked)
 }
 
 # Boot.img Repack "$(< FILE)"
@@ -137,7 +146,7 @@ function fbb() {
 # Fastboot boot magisk_boot.img (flashes the working boot.img with root)
 function ffmb() {
     echo "flashing boot.img at $DEVICE"
-    MAGISK_FILE=$SCRIPT_DIR/devices/$DEVICE/rom/magisk_boot.img
+    MAGISK_FILE=$SCRIPT_DIR/devices/$DEVICE/rom/magisk/boot.img
     if [ ! -f $MAGISK_FILE ]; then
         echo "you must put your magisk patched boot.img at $MAGISK_FILE"
     fi
@@ -186,8 +195,9 @@ Commands:
  ke                      extracts the kernel
  kb                      builds the kernel
  rd                      rom download
- re                      rom unzip
+ re                      rom extrack
  be                      boot.img (from ROM) extract 
+ mbe                     magisk_boot.img extract, extracts magisk-patched boot img, for repacking with custon kernel and root
  br                      boot.img repacked with kernel built from kb
  brwok                   repacks boot.img but with original kernel, not built from kb
  rau                     ramdisk unpack

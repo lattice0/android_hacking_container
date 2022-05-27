@@ -1,7 +1,7 @@
 *.zip
 kernel/*
 !kernel/kernel_build.sh
-!kernel/kernel_clone.sh
+!kernel/kernel_download.sh
 !kernel/kernel_extract.sh
 rom/*
 !rom/rom_download.sh

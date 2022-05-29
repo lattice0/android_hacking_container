@@ -1,3 +1,4 @@
+# Only useful if kernel is compressed and not cloned
 rm -rf k
 mkdir k
 echo "extracting kernel at folder $PWD/k..."

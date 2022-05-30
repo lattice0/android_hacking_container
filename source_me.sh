@@ -57,6 +57,12 @@ function be() {
     mkdir boot_img_unpacked && unpackbootimg -i boot.img -o boot_img_unpacked)
 }
 
+# Install Magisk
+function im() {
+    echo "downloading/installing magisk..."
+    (cd $SCRIPT_DIR/magisk_for_linux/ && ls && /bin/bash ./install_magisk.sh)
+}
+
 # Magisk boot.img extract, so we can repack with custom kernel + root
 function mbe() {
     fail_if_no_device

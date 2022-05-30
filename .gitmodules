@@ -4,3 +4,6 @@
 [submodule "magisk/Magisk"]
 	path = magisk/Magisk
 	url = https://github.com/topjohnwu/Magisk
+[submodule "magisk_for_linux"]
+	path = magisk_for_linux
+	url = https://github.com/lattice0/magisk_for_linux

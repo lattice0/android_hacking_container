@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#script from https://github.com/daboynb/magisk_for_linux
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 set -ex
 echo "patching with magisk for file $1"

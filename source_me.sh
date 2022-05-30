@@ -60,7 +60,13 @@ function be() {
 # Install Magisk
 function im() {
     echo "downloading/installing magisk..."
-    (cd $SCRIPT_DIR/magisk_for_linux/ && ls && /bin/bash ./install_magisk.sh)
+    (cd $SCRIPT_DIR/magisk_for_linux/&& /bin/bash ./install_magisk.sh)
+}
+
+# Patch with Magisk
+function pm() {
+    echo "patching with magisk..."
+    (cd $SCRIPT_DIR/magisk_for_linux/ && /bin/bash ./patch_magisk.sh $SCRIPT_DIR/devices/$DEVICE/rom/r/boot.img)
 }
 
 # Magisk boot.img extract, so we can repack with custom kernel + root

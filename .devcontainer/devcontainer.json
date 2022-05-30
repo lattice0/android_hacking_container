@@ -12,11 +12,11 @@
 	
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": ["ms-vscode.cpptools"],
-	"workspaceMount": "source=${localWorkspaceFolder},target=/home/project,type=bind,consistency=cached", 
-	"workspaceFolder": "/home/project",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/home/dev/project,type=bind,consistency=cached", 
+	"workspaceFolder": "/home/dev/project",
 	"runArgs": ["--privileged"],
 	"mounts": ["source=/dev/bus/usb,target=/dev/bus/usb,type=bind,consistency=cached",
-			   "source=${localEnv:HOME}/.android_aos_docker,target=/root/.android,type=bind,consistency=cached"],
+			   "source=${localEnv:HOME}/.android_aos_docker,target=/root/.android,type=bind,consistency=cached"]
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 

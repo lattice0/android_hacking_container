@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#script from https://github.com/daboynb/magisk_for_linux
+#script based on https://github.com/daboynb/magisk_for_linux
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 set -ex
 MAGISK_INSTALL_DIR=$SCRIPT_DIR
@@ -41,15 +41,3 @@ sed -i "/$ESCAPED_KEYWORD/d" util_functions.sh
 (echo "$line-1"; echo a; echo 'echo "$1"'; echo .; echo wq) | ed util_functions.sh 
 #Replace getprop
 sed -i 's/getprop/adb shell getprop/g' util_functions.sh 
-#Adb
-#echo "Waiting for adb conenction"
-#while true; do adb get-state > /dev/null 2>&1 && break; done
-#Patch
-#echo "Be sure adb is running and you have allowed on your phone"
-#echo "Now if the adb is working we can patch the image"
-#echo ""
-#read -e -p "Enter filename : " file
-#eval xyz=${abc[i]}
-#eval file=$file
-#echo "$file" | tr -d ''
-#sh boot_patch.sh $file

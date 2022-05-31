@@ -78,6 +78,20 @@ function mbe() {
     mkdir boot_img_unpacked && unpackbootimg -i $MAGISK_FILE -o boot_img_unpacked)
 }
 
+function edt() {
+    fail_if_no_device
+    extract-dtb $SCRIPT_DIR/devices/$DEVICE/rom/r/boot.img -o $SCRIPT_DIR/devices/$DEVICE/rom/device_tree
+    (cd $SCRIPT_DIR/devices/$DEVICE/rom/device_tree &&
+    rm -rf decompiled_device_tree
+    mkdir -p decompiled_device_tree
+    for file in *;
+        do
+            #echo "doing for file $file"
+            dtc -q -I dtb -O dts -o decompiled_device_tree/$file.dts "$file";
+        done
+    )
+}
+
 # Boot.img Repack "$(< FILE)"
 function br() {
     fail_if_no_device
@@ -203,12 +217,15 @@ function h() {
 Commands:
  DEVICE=my_device        sets the current device, which makes all commands work on devices/my_device
  dt			 downloads the toolchain for this device
+ im                      install magisk
+ pm                      patch boot.img with magisk
  kd                      downloads the kernel
  ke                      extracts the kernel
  kb                      builds the kernel
  rd                      rom download
  re                      rom extrack
  be                      boot.img (from ROM) extract 
+ edt                     extract device tree from boot.img
  mbe                     magisk_boot.img extract, extracts magisk-patched boot img, for repacking with custon kernel and root
  br                      boot.img repacked with kernel built from kb
  brwok                   repacks boot.img but with original kernel, not built from kb

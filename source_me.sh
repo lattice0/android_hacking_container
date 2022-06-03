@@ -96,11 +96,13 @@ function edt() {
 function br() {
     fail_if_no_device
     echo "repacking boot.img at $DEVICE"
+    EXTRA_BOOT_ARGS=`cat $SCRIPT_DIR/devices/$DEVICE/kernel/extra_boot_args.txt 2>/dev/null`
+    echo "with extra boot args: ${EXTRA_BOOT_ARGS}"
     (cd $SCRIPT_DIR/devices/$DEVICE/rom/r/boot_img_unpacked && \
     mkbootimg --kernel "$SCRIPT_DIR/devices/$DEVICE/kernel/k/out/arch/arm64/boot/Image.gz" \
     --ramdisk boot.img-ramdisk \
     --dtb boot.img-dtb \
-    --cmdline "$(< boot.img-cmdline) androidboot.init_fatal_reboot_target=recovery" \
+    --cmdline "$(< boot.img-cmdline) ${EXTRA_BOOT_ARGS}" \
     --base "$(< boot.img-base)" \
     --kernel_offset "$(< boot.img-kernel_offset)" \
     --ramdisk_offset "$(< boot.img-ramdisk_offset)" \
@@ -216,7 +218,7 @@ function h() {
     cat << EOF
 Commands:
  DEVICE=my_device        sets the current device, which makes all commands work on devices/my_device
- dt			 downloads the toolchain for this device
+ dt			             downloads the toolchain for this device
  im                      install magisk
  pm                      patch boot.img with magisk
  kd                      downloads the kernel
@@ -272,13 +274,13 @@ function emu_build() {
     (cd $SCRIPT_DIR/devices/$DEVICE/emu; ./emu_build.sh)
 }
 
-# Builds the emulator
+# Launches the emulator
 function emu_launch_generic() {
     fail_if_no_device
     (cd $SCRIPT_DIR/devices/$DEVICE/emu; ./emu_launch_generic.sh)
 }
 
-# Discovers clang version inside the kernel from the ROM
+# Discovers clang version inside the kernel which is inside the ROM
 function discover_clang_version() {
     fail_if_no_device
     if [ ! -f $SCRIPT_DIR/devices/$DEVICE/rom/r/boot.img ]; then

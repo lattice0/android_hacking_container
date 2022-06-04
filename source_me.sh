@@ -66,7 +66,7 @@ function im() {
 # Patch with Magisk
 function pm() {
     echo "patching with magisk..."
-    (cd $SCRIPT_DIR/magisk_for_linux/ && /bin/bash ./patch_magisk.sh $SCRIPT_DIR/devices/$DEVICE/rom/r/boot.img)
+    (cd $SCRIPT_DIR/magisk_for_linux/ && ./patch_magisk.sh $SCRIPT_DIR/devices/$DEVICE/rom/r/boot.img)
 }
 
 # Magisk boot.img extract, so we can repack with custom kernel + root

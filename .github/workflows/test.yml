@@ -13,19 +13,19 @@ jobs:
             docker build -t project .
       - name: download tools
         run: |
-            cd .devcontainer && docker run -v $PWD/..:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && dt"
+            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && dt"
       - name: kernel download + build
         run: |
-            cd .devcontainer && docker run -v $PWD/..:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && kd && kb "
+            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && kd && kb "
       - name: rom download
         run: |
-            cd .devcontainer && docker run -v $PWD/..:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && rd"
+            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && rd"
       - name: boot.img extract and repack
         run: |
-            cd .devcontainer && docker run -v $PWD/..:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && br && br"
+            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && br && br"
       - name: kernel download + build + rom download + boot.img extract + boot.img repack 
         run: |
-            cd .devcontainer && docker run -v $PWD/..:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && kd && kb && rd && be && br"
+            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && kd && kb && rd && be && br"
   Discover:
     runs-on: ubuntu-latest
     env: 
@@ -38,7 +38,7 @@ jobs:
             docker build -t project .
       - name: discover_clang_version
         run: |
-            cd .devcontainer && docker run -v $PWD/..:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && rd && re && be && discover_clang_version"
+            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && rd && re && be && discover_clang_version"
   Binaries:
     runs-on: ubuntu-latest
     env: 

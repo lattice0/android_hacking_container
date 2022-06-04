@@ -8,5 +8,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - run: source source_me.sh
-      - run: dt && kd && kb
+      - run: |
+            source source_me.sh
+            dt && kd && kb

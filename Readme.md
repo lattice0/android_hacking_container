@@ -2,6 +2,8 @@
 
 Project that facilitates hacking android phones, compiling and flashing kernels, etc, on a docker container.
 
+Supports: kernel download/build, boot.img unpack from ROM + repack, kernel/boot.img boot/flash, magisk root on computer instead of android, system.img unpack, building binaries for android like kexec, and more!
+
 # Using it
 
 Just clone and do `./build.sh` and `./run.sh`, run `source source_me.sh` (I'm trying to get rid of this part), then you should get a container with everything setted up for building/hacking/flashing the kernel/ROM. Look at `devices/poco_m3` for an example. Anyways, just set `DEVICE=your_device` (change by your phone name) and it should run the commands on the directory `devices/$DEVICE`, where it will find the scripts for cloning aos, kernel and the ROM. The `source_me.sh` file defines functions that calls these scripts and more, you can call these functions by their name from terminal to do stuff like cloning the kernel, building the kernel, unpacking boot.img from the ROM, repacking it, flashing the boot, etc.

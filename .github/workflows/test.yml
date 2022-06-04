@@ -1,7 +1,7 @@
 name: Test
 on: [push]
 jobs:
-  Test-Simple-Commands:
+  Kernel:
     runs-on: ubuntu-latest
     env: 
       DEVICE: poco_m3
@@ -28,3 +28,48 @@ jobs:
         run: |
             source source_me.sh
             kd && kb && rd && be && br
+  Discover:
+    runs-on: ubuntu-latest
+    env: 
+      DEVICE: poco_m3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: download tools
+        run: |
+            source source_me.sh
+            dt
+      - name: discover_clang_version
+        run: |
+            source source_me.sh
+            dt && rd && re && be && discover_clang_version
+  Binaries:
+    runs-on: ubuntu-latest
+    env: 
+      DEVICE: poco_m3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: download tools
+        run: |
+            source source_me.sh
+            dt
+      - name: build binaries for aarch64 architecture
+        run: |
+            source source_me.sh
+            build_binaries
+  Kernel:
+    runs-on: ubuntu-latest
+    env: 
+      DEVICE: poco_m3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: unpack ramdisk
+        run: |
+            source source_me.sh
+            dt && rd && re && be && rau
+      - name: repack ramdisk
+        run: |
+            source source_me.sh
+            re

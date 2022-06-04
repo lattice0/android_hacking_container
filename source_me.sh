@@ -320,7 +320,7 @@ function discover_clang_version() {
         echo "you must extract the rom first with the bu command"
     fi
     if [ ! -f $SCRIPT_DIR/devices/$DEVICE/rom/r/boot_img_unpacked/boot.img-kernel ]; then
-        echo "you must extract the boot.img first with the bu command"
+        echo "you must extract the boot.img first with the be command"
     fi
     (cd $SCRIPT_DIR/devices/$DEVICE/rom/r/boot_img_unpacked && \
     rm -rf boot.img-kernel_extracted && cp boot.img-kernel boot.img-kernel_extracted.gz && \

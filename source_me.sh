@@ -191,6 +191,20 @@ function se() {
     rm -rf system && mkdir system && mount -o ro unpacked_system.img system)
 }
 
+function download_binaries() {
+    KEXEC_DIR=$SCRIPT_DIR/devices/$DEVICE/binaries/kexec
+    if [ -f ${KEXEC_DIR}/download_kexec.sh ]; then
+        cd ${KEXEC_DIR} && ./download_kexec.sh
+    fi
+}
+
+function compile_binaries() {
+    KEXEC_DIR=$SCRIPT_DIR/devices/$DEVICE/binaries/kexec
+    if [ -f ${KEXEC_DIR}/build_kexec.sh ]; then
+        cd ${KEXEC_DIR} && ./build_kexec.sh
+    fi
+}
+
 # Reboot into bootloader mode using adb
 function f() {
     echo "rebooting into bootloader mode (fastboot)"

@@ -1,7 +1,7 @@
 name: Test
 on: [push]
 jobs:
-  Test simple commands:
+  Test-Simple-Commands:
     runs-on: ubuntu-latest
     env: 
       DEVICE: poco_m3

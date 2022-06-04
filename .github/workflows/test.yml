@@ -26,16 +26,9 @@ jobs:
       - name: kernel download + build + rom download + boot.img extract + boot.img repack 
         run: |
             docker run -v $PWD:/home/dev/project docker run -v $PWDproject /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && kd && kb && rd && be && br"
-  Discover:
-    runs-on: ubuntu-latest
-    env: 
-      DEVICE: poco_m3
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: docker build
-        run: |
-            docker build -t project .
       - name: discover_clang_version
         run: |
             docker run -v $PWD:/home/dev/project docker run -v $PWDproject /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && rd && re && be && discover_clang_version"
+      - name: ram disk unpack and repack
+        run: |
+            docker run -v $PWD:/home/dev/project docker run -v $PWDproject /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && rau && rar"

@@ -198,12 +198,23 @@ function download_binaries() {
     fi
 }
 
-function compile_binaries() {
+function build_binaries() {
     KEXEC_DIR=$SCRIPT_DIR/devices/$DEVICE/binaries/kexec
     if [ -f ${KEXEC_DIR}/build_kexec.sh ]; then
         cd ${KEXEC_DIR} && ./build_kexec.sh
     fi
 }
+
+function upload_binaries() {
+    KEXEC_DIR=$SCRIPT_DIR/devices/$DEVICE/binaries/kexec
+    # Only push if there's a file to build it
+    if [ -f ${KEXEC_DIR}/build_kexec.sh ]; then
+        #adb push "${SCRIPT_DIR}/devices/${DEVICE}/binaries/kexec/kex/build/sbin/kexec" "/data/local/kexec"
+        adb push ${SCRIPT_DIR}/devices/${DEVICE}/binaries/kexec/kex/build/sbin/kexec /data/local/tmp && \
+        adb shell "chmod +x /data/local/tmp/kexec"
+    fi
+}
+
 
 # Reboot into bootloader mode using adb
 function f() {

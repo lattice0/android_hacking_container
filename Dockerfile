@@ -23,7 +23,7 @@ RUN sudo apt-get update && \
         libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig libncurses5 rsync \
         nano libssl-dev bc python2 cpio device-tree-compiler openjdk-8-jdk \
         python-is-python3 abootimg brotli usbutils python3-setuptools libarchive-tools \
-        qemu-kvm ninja-build python3-pip ccache language-pack-ru dos2unix unzip ed && \
+        qemu-kvm ninja-build python3-pip ccache language-pack-ru dos2unix unzip ed autoconf && \
     sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV PATH="${PATH}:/opt/platform_tools/platform-tools/"

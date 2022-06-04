@@ -6,5 +6,7 @@ jobs:
     env: 
       DEVICE: poco_m3
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       - run: source source_me.sh
       - run: dt && kd && kb

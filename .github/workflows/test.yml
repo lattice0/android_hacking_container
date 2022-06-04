@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v3
       - name: docker build
         run: |
-            cd .devcontainer && docker build -t project .
+            docker build -t project .
       - name: download tools
         run: |
             cd .devcontainer && docker run -v $PWD/..:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && dt"
@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v3
       - name: docker build
         run: |
-            cd .devcontainer && docker build -t project .
+            docker build -t project .
       - name: discover_clang_version
         run: |
             cd .devcontainer && docker run -v $PWD/..:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && rd && re && be && discover_clang_version"

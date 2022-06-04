@@ -1,0 +1,10 @@
+name: Test
+on: [push]
+jobs:
+  Test simple commands:
+    runs-on: ubuntu-latest
+    env: 
+      DEVICE: poco_m3
+    steps:
+      - run: source source_me.sh
+      - run: kb

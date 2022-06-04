@@ -58,7 +58,7 @@ jobs:
         run: |
             source source_me.sh
             build_binaries
-  Kernel:
+  Ramdisk:
     runs-on: ubuntu-latest
     env: 
       DEVICE: poco_m3

@@ -16,3 +16,15 @@ jobs:
         run: |
             source source_me.sh
             kd && kb
+      - name: rom download
+        run: |
+            source source_me.sh
+            rd
+      - name: boot.img extract and repack
+        run: |
+            source source_me.sh
+            be && br
+      - name: kernel download + build + rom download + boot.img extract + boot.img repack 
+        run: |
+            source source_me.sh
+            kd && kb && rd && be && br

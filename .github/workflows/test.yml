@@ -13,19 +13,19 @@ jobs:
             docker build -t project .
       - name: download tools
         run: |
-            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && dt"
+            docker run -v $PWD:/home/dev/project docker run -v $PWDproject /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && dt"
       - name: kernel download + build
         run: |
-            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && kd && kb "
+            docker run -v $PWD:/home/dev/project docker run -v $PWDproject /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && kd && kb "
       - name: rom download
         run: |
-            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && rd"
+            docker run -v $PWD:/home/dev/project docker run -v $PWDproject /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && rd"
       - name: boot.img extract and repack
         run: |
-            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && br && br"
+            docker run -v $PWD:/home/dev/project docker run -v $PWDproject /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && br && br"
       - name: kernel download + build + rom download + boot.img extract + boot.img repack 
         run: |
-            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && kd && kb && rd && be && br"
+            docker run -v $PWD:/home/dev/project docker run -v $PWDproject /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && kd && kb && rd && be && br"
   Discover:
     runs-on: ubuntu-latest
     env: 
@@ -38,34 +38,4 @@ jobs:
             docker build -t project .
       - name: discover_clang_version
         run: |
-            docker run -v $PWD:/home/dev/project -it project /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && rd && re && be && discover_clang_version"
-  Binaries:
-    runs-on: ubuntu-latest
-    env: 
-      DEVICE: poco_m3
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: download tools
-        run: |
-            source source_me.sh
-            dt
-      - name: build binaries for aarch64 architecture
-        run: |
-            source source_me.sh
-            build_binaries
-  Ramdisk:
-    runs-on: ubuntu-latest
-    env: 
-      DEVICE: poco_m3
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: unpack ramdisk
-        run: |
-            source source_me.sh
-            dt && rd && re && be && rau
-      - name: repack ramdisk
-        run: |
-            source source_me.sh
-            re
+            docker run -v $PWD:/home/dev/project docker run -v $PWDproject /bin/bash -c "DEVICE=../../poco_m3 && source android_hacking_container/source_me.sh && rd && re && be && discover_clang_version"

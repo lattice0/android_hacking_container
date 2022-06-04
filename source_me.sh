@@ -78,6 +78,7 @@ function mbe() {
     mkdir boot_img_unpacked && unpackbootimg -i $MAGISK_FILE -o boot_img_unpacked)
 }
 
+# Extract Device Tree (Source Code)
 function edt() {
     fail_if_no_device
     extract-dtb $SCRIPT_DIR/devices/$DEVICE/rom/r/boot.img -o $SCRIPT_DIR/devices/$DEVICE/rom/device_tree
@@ -148,8 +149,8 @@ function brwok() {
 function rau() {
     fail_if_no_device
     echo "unpacking ramdisk.img at $DEVICE"
-    (cd $SCRIPT_DIR/devices/$DEVICE/rom/r && mkdir initrd && cd initrd && \
-        cat ../initrd.img | gunzip | cpio -vid)
+    (cd $SCRIPT_DIR/devices/$DEVICE/rom/r && rm -rf initrd && mkdir -p initrd && cd initrd && \
+        cat ../boot_img_unpacked/boot.img-ramdisk | gunzip | cpio -vid)
 }
 
 # Ramdisk Repack
@@ -191,6 +192,7 @@ function se() {
     rm -rf system && mkdir system && mount -o ro unpacked_system.img system)
 }
 
+# Download binaries source code for building
 function download_binaries() {
     KEXEC_DIR=$SCRIPT_DIR/devices/$DEVICE/binaries/kexec
     if [ -f ${KEXEC_DIR}/download_kexec.sh ]; then
@@ -198,6 +200,7 @@ function download_binaries() {
     fi
 }
 
+# Builds all binaries that will be ran on Android
 function build_binaries() {
     KEXEC_DIR=$SCRIPT_DIR/devices/$DEVICE/binaries/kexec
     if [ -f ${KEXEC_DIR}/build_kexec.sh ]; then
@@ -205,6 +208,7 @@ function build_binaries() {
     fi
 }
 
+# Uploads all binaries that will be ran on Android
 function upload_binaries() {
     KEXEC_DIR=$SCRIPT_DIR/devices/$DEVICE/binaries/kexec
     # Only push if there's a file to build it
@@ -215,6 +219,10 @@ function upload_binaries() {
     fi
 }
 
+# Uploads the kernel and other stuff to Android for kexec usage
+function upload_kernel_and_stuff() {
+    /bin/bash ${SCRIPT_DIR}/devices/${DEVICE}/kernel/upload_kexec_kernel_stuff.sh
+}
 
 # Reboot into bootloader mode using adb
 function f() {
@@ -252,7 +260,7 @@ Commands:
  rd                      rom download
  re                      rom extrack
  be                      boot.img (from ROM) extract 
- edt                     extract device tree from boot.img
+ edt                     extract device tree (from boot.img)
  mbe                     magisk_boot.img extract, extracts magisk-patched boot img, for repacking with custon kernel and root
  br                      boot.img repacked with kernel built from kb
  brwok                   repacks boot.img but with original kernel, not built from kb

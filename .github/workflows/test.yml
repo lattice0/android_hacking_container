@@ -8,6 +8,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - run: |
+      - name: download tools
+        run: |
             source source_me.sh
-            dt && kd && kb
+            dt
+      - name: kernel download + build
+        run: |
+            source source_me.sh
+            kd && kb

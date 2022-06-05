@@ -16,19 +16,19 @@ jobs:
             docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && dt"
       - name: kernel download + build
         run: |
-            docker run -u dev -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && kd && kb "
+            docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && kd && kb "
       - name: rom download
         run: |
-            docker run -u dev -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && rd"
+            docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && rd"
       - name: boot.img extract and repack
         run: |
-            docker run -u dev -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && br && br"
+            docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && br && br"
       - name: kernel download + build + rom download + boot.img extract + boot.img repack 
         run: |
-            docker run -u dev -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && kd && kb && rd && be && br"
+            docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && kd && kb && rd && be && br"
       - name: discover_clang_version
         run: |
-            docker run -u dev -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && rd && re && be && discover_clang_version"
+            docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && rd && re && be && discover_clang_version"
       - name: ram disk unpack and repack
         run: |
-            docker run -u dev -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && rau && rar"
+            docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && rau && rar"

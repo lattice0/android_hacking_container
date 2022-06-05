@@ -17,9 +17,9 @@ jobs:
       - name: kernel download + build
         run: |
             docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && kd && kb "
-      - name: rom download
+      - name: rom download + extract
         run: |
-            docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && rd"
+            docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && rd && re"
       - name: boot.img extract and repack
         run: |
             docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && be && br"

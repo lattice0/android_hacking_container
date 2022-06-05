@@ -73,8 +73,8 @@ RUN ANDROID_BRANCH=android-11.0.0_r48 && \
 
 # Official misc prebuilts
 ENV PATH="${PATH}:/opt/google_misc/misc"
-RUN ANDROID_BRANCH=android-10.0.0_r47 && \
-    COMMIT=f1a323aedf4871c698e2186526631a48afa2fb89 && \
+RUN ANDROID_BRANCH=android-11.0.0_r48 && \
+    COMMIT=9ae268fc4354288daed74956df3a1dba1548abbd && \
     sudo mkdir -p /opt/google_misc && \
     TEMPD=$(mktemp -d) && \   
     cd $TEMPD && git clone https://android.googlesource.com/platform/prebuilts/misc -b $ANDROID_BRANCH && \ 

@@ -13,7 +13,7 @@ jobs:
             docker build -t project .
       - name: download tools
         run: |
-            ls -la && docker run -u dev -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && dt"
+            ls -la && sudo chown -R "$USER":"$USER" && docker run -u dev -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && dt"
       - name: kernel download + build
         run: |
             docker run -u dev -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && kd && kb "

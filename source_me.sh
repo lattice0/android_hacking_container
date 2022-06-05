@@ -210,11 +210,6 @@ function upload_binaries() {
     /bin/bash $SCRIPT_DIR/devices/$DEVICE/binaries/upload_binaries.sh
 }
 
-# Uploads the kernel and other stuff to Android for kexec usage
-function upload_kernel_and_stuff() {
-    /bin/bash ${SCRIPT_DIR}/devices/${DEVICE}/kernel/upload_kexec_kernel_stuff.sh
-}
-
 # Reboot into bootloader mode using adb
 function f() {
     echo "rebooting into bootloader mode (fastboot)"

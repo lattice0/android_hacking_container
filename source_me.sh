@@ -202,21 +202,12 @@ function download_binaries() {
 
 # Builds all binaries that will be ran on Android
 function build_binaries() {
-    KEXEC_DIR=$SCRIPT_DIR/devices/$DEVICE/binaries/kexec
-    if [ -f ${KEXEC_DIR}/build_kexec.sh ]; then
-        cd ${KEXEC_DIR} && ./build_kexec.sh
-    fi
+    /bin/bash $SCRIPT_DIR/devices/$DEVICE/binaries/build_binaries.sh
 }
 
 # Uploads all binaries that will be ran on Android
 function upload_binaries() {
-    KEXEC_DIR=$SCRIPT_DIR/devices/$DEVICE/binaries/kexec
-    # Only push if there's a file to build it
-    if [ -f ${KEXEC_DIR}/build_kexec.sh ]; then
-        #adb push "${SCRIPT_DIR}/devices/${DEVICE}/binaries/kexec/kex/build/sbin/kexec" "/data/local/kexec"
-        adb push ${SCRIPT_DIR}/devices/${DEVICE}/binaries/kexec/kex/build/sbin/kexec /data/local/tmp && \
-        adb shell "chmod +x /data/local/tmp/kexec"
-    fi
+    /bin/bash $SCRIPT_DIR/devices/$DEVICE/binaries/upload_binaries.sh
 }
 
 # Uploads the kernel and other stuff to Android for kexec usage

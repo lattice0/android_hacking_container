@@ -49,14 +49,6 @@ function re() {
     (cd $SCRIPT_DIR/devices/$DEVICE/rom; rm -rf r && mkdir r && unzip *.zip -d r)
 }
 
-# Boot.img Extract
-function be() {
-    fail_if_no_device
-    echo "extracting boot.img at $DEVICE"
-    (cd $SCRIPT_DIR/devices/$DEVICE/rom/r && rm -rf boot_img_unpacked && 
-    mkdir boot_img_unpacked && unpackbootimg -i boot.img -o boot_img_unpacked)
-}
-
 # Install Magisk
 function im() {
     echo "downloading/installing magisk..."
@@ -67,6 +59,14 @@ function im() {
 function pm() {
     echo "patching with magisk..."
     (cd $SCRIPT_DIR/magisk_for_linux/ && ./patch_magisk.sh $SCRIPT_DIR/devices/$DEVICE/rom/r/boot.img $SCRIPT_DIR $DEVICE)
+}
+
+# Boot.img Extract
+function be() {
+    fail_if_no_device
+    echo "extracting boot.img at $DEVICE"
+    (cd $SCRIPT_DIR/devices/$DEVICE/rom/r && rm -rf boot_img_unpacked && 
+    mkdir boot_img_unpacked && unpackbootimg -i boot.img -o boot_img_unpacked)
 }
 
 # Magisk boot.img extract, so we can repack with custom kernel + root
@@ -115,7 +115,7 @@ function br() {
     --header_version "$(< boot.img-header_version)" \
     --hashtype "$(< boot.img-hashtype)" \
     --board "$(< boot.img-board)" \
-    -o ../boot.img)
+    -o ../boot_repacked.img)
     #TODO:
     #    --second `cat boot.img-second_offset` \
     #    --second_offset `cat boot.img-second_offset` \
@@ -141,7 +141,7 @@ function brwok() {
     --header_version "$(< boot.img-header_version)" \
     --hashtype "$(< boot.img-hashtype)" \
     --board "$(< boot.img-board)" \
-    -o ../boot.img)
+    -o ../boot_repacked.img)
 }
 
 
@@ -163,19 +163,21 @@ function rar() {
 # Fastboot flash boot.img
 function ffb() {
     echo "flashing boot.img at $DEVICE"
-    fastboot flash boot $SCRIPT_DIR/devices/$DEVICE/rom/r/boot.img
+    fastboot flash boot $SCRIPT_DIR/devices/$DEVICE/rom/r/boot_repacked.img
 }
 
 # Fastboot boot boot.img
 function fbb() {
     echo "flashing boot.img at $DEVICE"
-    fastboot boot $SCRIPT_DIR/devices/$DEVICE/rom/r/boot.img
+    fastboot boot $SCRIPT_DIR/devices/$DEVICE/rom/r/boot_repacked.img
 }
 
 # Fastboot boot magisk_boot.img (flashes the working boot.img with root)
+# Use this if you patched manually through phone and placed manual_boot_magisk.img 
+# manually there
 function ffmb() {
     echo "flashing boot.img at $DEVICE"
-    MAGISK_FILE=$SCRIPT_DIR/devices/$DEVICE/rom/magisk/boot.img
+    MAGISK_FILE=$SCRIPT_DIR/devices/$DEVICE/rom/magisk/manual_boot_magisk.img
     if [ ! -f $MAGISK_FILE ]; then
         echo "you must put your magisk patched boot.img at $MAGISK_FILE"
     fi
@@ -238,8 +240,6 @@ function h() {
 Commands:
  DEVICE=my_device        sets the current device, which makes all commands work on devices/my_device
  dt			             downloads the toolchain for this device
- im                      install magisk
- pm                      patch boot.img with magisk
  kd                      downloads the kernel
  ke                      extracts the kernel
  kb                      builds the kernel
@@ -247,6 +247,8 @@ Commands:
  re                      rom extrack
  be                      boot.img (from ROM) extract 
  edt                     extract device tree (from boot.img)
+ im                      install magisk (for desktop)
+ pm                      patches (boot.img) with magisk
  mbe                     magisk_boot.img extract, extracts magisk-patched boot img, for repacking with custon kernel and root
  br                      boot.img repacked with kernel built from kb
  brwok                   repacks boot.img but with original kernel, not built from kb

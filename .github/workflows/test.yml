@@ -32,3 +32,9 @@ jobs:
       - name: ram disk unpack and repack
         run: |
             docker run -u "$(id -u):$(id -g)" -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && rau && rar"
+      - name: install magisk
+        run: |
+            docker run -u "$(id -u):$(id -g)" -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && im"
+      - name: patch magisk
+        run: |
+            docker run -u "$(id -u):$(id -g)" -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && pm"

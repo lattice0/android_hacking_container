@@ -7,4 +7,5 @@ ls
 /bin/bash ./boot_patch.sh $1
 rm -rf $SCRIPT_DIR/devices/$DEVICE/rom/r/magisk
 mkdir -p $SCRIPT_DIR/devices/$DEVICE/rom/r/magisk
-cp new-boot.img $SCRIPT_DIR/devices/$DEVICE/rom/r/magisk/boot.img
+mkdir -p $2/devices/$3/rom/r/magisk/
+cp new-boot.img $2/devices/$3/rom/r/magisk/boot.img

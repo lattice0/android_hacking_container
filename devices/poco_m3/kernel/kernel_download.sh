@@ -8,4 +8,4 @@ rm -rf k
 #git clone https://github.com/c3eru/Q k && cd k && git checkout 355bd900336d6c909e5b8743c50e9669119c0b8d
 #git clone https://github.com/c3eru/kernela10 k
 #git clone https://github.com/c3eru/a10tes k
-git clone https://github.com/MoonBase-Project/MSM-4.19-MiBengal k
+git clone https://github.com/lattice0/MSM-4.19-MiBengal k

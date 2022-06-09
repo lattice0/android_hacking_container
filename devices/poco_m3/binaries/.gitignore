@@ -1,0 +1,4 @@
+!kexec/*.sh
+!strace/*.sh
+!nano/*.sh
+!*.sh

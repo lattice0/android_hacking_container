@@ -28,7 +28,7 @@ jobs:
             docker run -u "$(id -u):$(id -g)" -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && kd && kb && rd && be && br"
       - name: discover_clang_version
         run: |
-            docker run -u "$(id -u):$(id -g)" -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && rd && re && be && discover_clang_version"
+            docker run -u "$(id -u):$(id -g)" -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && discover_clang_version"
       - name: ram disk unpack and repack
         run: |
             docker run -u "$(id -u):$(id -g)" -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && rau && rar"

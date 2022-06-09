@@ -1,0 +1,1 @@
+androidboot.selinux=permissive ramoops.ecc=1 androidboot.init_fatal_reboot_target=recovery

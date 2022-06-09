@@ -1,3 +1,4 @@
+set -xe
 # Clang, the compiler
 (ANDROID_BRANCH=android-11.0.0_r48 && \
 CLANG_VERSION=clang-r383902b.tar.gz && \

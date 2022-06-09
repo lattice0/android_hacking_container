@@ -1,0 +1,1 @@
+rm -rf str && git clone https://github.com/strace/strace str

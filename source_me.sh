@@ -196,10 +196,7 @@ function se() {
 
 # Download binaries source code for building
 function download_binaries() {
-    KEXEC_DIR=$SCRIPT_DIR/devices/$DEVICE/binaries/kexec
-    if [ -f ${KEXEC_DIR}/download_kexec.sh ]; then
-        cd ${KEXEC_DIR} && ./download_kexec.sh
-    fi
+    /bin/bash $SCRIPT_DIR/devices/$DEVICE/binaries/download_binaries.sh
 }
 
 # Builds all binaries that will be ran on Android

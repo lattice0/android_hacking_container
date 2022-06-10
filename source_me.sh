@@ -98,9 +98,17 @@ function br() {
     fail_if_no_device
     echo "repacking boot.img at $DEVICE"
     EXTRA_BOOT_ARGS=`cat $SCRIPT_DIR/devices/$DEVICE/kernel/extra_boot_args.txt 2>/dev/null`
+    BOOT_DIR=$SCRIPT_DIR/devices/$DEVICE/kernel/k/out/arch/arm64/boot
+    IMAGE=Image
+    if [ -f "${BOOT_DIR}/Image.gz" ]; then
+        IMAGE=${BOOT_DIR}/Image.gz
+    else 
+        IMAGE=${BOOT_DIR}/Image
+    fi
+
     echo "with extra boot args: ${EXTRA_BOOT_ARGS}"
     (cd $SCRIPT_DIR/devices/$DEVICE/rom/r/boot_img_unpacked && \
-    mkbootimg --kernel "$SCRIPT_DIR/devices/$DEVICE/kernel/k/out/arch/arm64/boot/Image.gz" \
+    mkbootimg --kernel "${IMAGE}" \
     --ramdisk boot.img-ramdisk \
     --dtb boot.img-dtb \
     --cmdline "$(< boot.img-cmdline) ${EXTRA_BOOT_ARGS}" \
@@ -247,7 +255,7 @@ Commands:
  im                      install magisk (for desktop)
  pm                      patches (boot.img) with magisk
  mbe                     magisk_boot.img extract, extracts magisk-patched boot img, for repacking with custon kernel and root
- br                      boot.img repacked with kernel built from kb
+ br                      boot_repacked.img repacked with kernel built from kb
  brwok                   repacks boot.img but with original kernel, not built from kb
  rau                     ramdisk unpack
  rar                     ramdisk repack

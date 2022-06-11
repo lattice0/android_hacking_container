@@ -192,6 +192,13 @@ function ffmb() {
     fastboot flash boot $MAGISK_FILE
 }
 
+# runs dmesg > dmesg.txt on phone and downloads the result
+function dm() {
+    echo "running dmesg with adb"
+    adb shell su -c "dmesg > /data/local/tmp/dmesg.txt"
+    adb pull /data/local/tmp/dmesg.txt $SCRIPT_DIR/devices/$DEVICE/dmesg.txt
+}
+
 # System.img extract mount
 function se() {
     fail_if_no_device
@@ -263,16 +270,17 @@ Commands:
  ffb                     runs fastboot flash boot.img
  ffmb                    runs fastboot flash magisk_boot.img (flashes the boot.img patched by magisk so you have root)
  fbb                     runs fastboot boot boot.img
+ dm                      grabs dmesg output and saves to your ${DEVICE} folder
  f                       reboot to fastboot mode (must be in adb mode)
  r                       reboot from fastboot to adb mode (must be in fastboot mode)
  p                       goes to the root of the project
- d                       goes to the root of the device (root_of_project/devices/$DEVICE)
+ d                       goes to the root of the ${DEVICE} folder
  discover_clang_version  discovers the clang version used to build the kernel from the ROM
  aosp_clone              clones AOSP entirely (could take hours)
  emu_clone               clones android emulator source code
  emu_rebuild             rebuild emulator
  emu_build               build again only changes
- emu_launch_generic      launches emulator with generic AOSP image built with m
+ emu_launch_generic      launches emulator with generic AOSP image built with 'm'
 EOF
 }
 

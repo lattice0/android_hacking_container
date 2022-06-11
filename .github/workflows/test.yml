@@ -46,4 +46,4 @@ jobs:
             docker run -u "$(id -u):$(id -g)" -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && download_binaries"
       - name: build_binaries
         run: |
-            docker run -u "$(id -u):$(id -g)" -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && build_binaries"
+            docker run -u root -v $PWD:/home/dev/project project /bin/bash -c "DEVICE=poco_m3 && source source_me.sh && build_binaries"

@@ -272,7 +272,7 @@ Commands:
  emu_clone               clones android emulator source code
  emu_rebuild             rebuild emulator
  emu_build               build again only changes
- emu_launch_generic      launches emulator with generic AOSP image built with `m`
+ emu_launch_generic      launches emulator with generic AOSP image built with m
 EOF
 }
 

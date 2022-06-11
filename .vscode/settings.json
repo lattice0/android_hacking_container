@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "algorithm": "cpp",
+        "workqueue.h": "c",
+        "rcupdate.h": "c"
+    },
+    "terminal.integrated.scrollback": 100000000,
+}

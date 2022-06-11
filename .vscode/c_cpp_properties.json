@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/x86_64-linux-gnu/urcu/",
+                "/usr/include/x86_64-linux-gnu/",
+                "${workspaceFolder}/devices/poco_m3/kernel/k/arch/arm64/include",
+                "${workspaceFolder}/devices/poco_m3/kernel/k/out/include/generated"
+            ],
+            "defines": [
+                "__KERNEL__"
+            ],
+            "cStandard": "c11",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cppStandard": "gnu++14",
+        }
+    ],
+    "version": 4
+}

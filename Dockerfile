@@ -93,6 +93,41 @@ RUN sudo apt-get update && sudo apt-get install -y python3-dev && \
 RUN cd /tmp && git clone https://github.com/PabloCastellano/extract-dtb && \
     cd extract-dtb && sudo python3 setup.py install
 
+# ---------------- Android SDK + NDK
+ENV OPT_DIR /opt
+
+ENV ANDROID_HOME=${OPT_DIR}/android-sdk-linux
+ENV PATH=${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:$PATH \
+    SDKMANAGER=${ANDROID_HOME}/cmdline-tools/bin/sdkmanager \
+    ANDROID_NDK_VERSION=22.1.7171670
+ENV ANDROID_NDK_HOME=${ANDROID_HOME}/ndk/${ANDROID_NDK_VERSION} \
+    ANDROID_SHA256_HASH="7a00faadc0864f78edd8f4908a629a46d622375cbe2e5814e82934aebecdb622" \
+    ANDROID_SDK_URL="https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip" 
+
+RUN set -ex && sudo mkdir ${ANDROID_HOME} && curl -sSL -o android-sdk.zip ${ANDROID_SDK_URL} \
+    && echo "${ANDROID_SHA256_HASH} *android-sdk.zip" | shasum -a 256 --check \
+    && TEMPD=$(mktemp -d) \
+    && unzip android-sdk.zip -d ${TEMPD} && rm android-sdk.zip \
+    && sudo mv ${TEMPD}/* ${ANDROID_HOME}/ \
+    && rm -rf ${TEMPD} \
+    && sudo chown $USERNAME:$USERNAME $ANDROID_HOME -R \
+    && echo y | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} --list \
+    && echo y | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "build-tools;25.0.1" \
+    && echo y | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "build-tools;28.0.3" \
+    && echo y | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "build-tools;29.0.2" \
+    && echo y | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "build-tools;30.0.3" \
+    && echo y | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "platform-tools" \
+    && echo y | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "platforms;android-25" \
+    && echo y | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "platforms;android-28" \
+    && echo y | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "platforms;android-30" \ 
+    && echo y | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "extras;android;m2repository" \
+    && echo y | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "extras;google;google_play_services" \
+    && ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "ndk;${ANDROID_NDK_VERSION}" \
+    && ${SDKMANAGER} --sdk_root=${ANDROID_HOME} "cmake;3.18.1" \
+    && yes | ${SDKMANAGER} --sdk_root=${ANDROID_HOME} --update \
+    && sudo chown $USERNAME:$USERNAME $ANDROID_HOME -R
+# ------------------------------------
+
 RUN sudo mkdir /opt/entrypoint && \ 
     TEMPD=$(mktemp -d) && \   
     echo "#!/bin/sh\n\

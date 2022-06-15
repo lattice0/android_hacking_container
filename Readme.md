@@ -1,16 +1,18 @@
 # Android Hacking Container 
 
-Project that facilitates hacking android phones, compiling and flashing kernels, etc, on a docker container.
+Project that facilitates hacking android phones, compiling and flashing kernels, etc, on a docker container/devcontainer.
 
 Supports: kernel download/build, boot.img unpack from ROM + repack, kernel/boot.img boot/flash, magisk root on computer instead of android, system.img unpack, building binaries for android like kexec, and more!
 
+You can however use this repo, but it's not recommended as you'll mess with the repo and won´t be able to make commits/PRs. Use the template, modify for your phone, enjoy the github workflows, etc.
+
 # Using it
 
-Just clone and do `./build.sh` and `./run.sh`, run `source source_me.sh` (I'm trying to get rid of this part), then you should get a container with everything setted up for building/hacking/flashing the kernel/ROM. Look at `devices/poco_m3` for an example. Anyways, just set `DEVICE=your_device` (change by your phone name) and it should run the commands on the directory `devices/$DEVICE`, where it will find the scripts for cloning aos, kernel and the ROM. The `source_me.sh` file defines functions that calls these scripts and more, you can call these functions by their name from terminal to do stuff like cloning the kernel, building the kernel, unpacking boot.img from the ROM, repacking it, flashing the boot, etc.
+This repo is not meant to be used directly. It's supposed to be used as a submodule on another repo, where you'll also put files specific for your phone. For a template based on the Poco M3 phone, see here: https://github.com/lattice0/poco_m3_hacking and click "use this template".
 
 ## Example
 
-Inside the container:
+Let's download the kernel, ROM, patch boot.img inside the ROM and flash to the phone. Inside the template, after sourcing the `source_me.sh`
 
 ```bash
 DEVICE=poco_m3
@@ -44,6 +46,19 @@ re
 ffb
 ```
 
+# Combos
+
+This repo allows you to use combos of commands to do things in series. Examples of combos:
+
+```
+f && kb && re && be && br && ffb && r # fastboot, kernel build, rom extract, boot.img extract, boot.img repack (w/ built kernel), fastboot flash boot.img, reboot
+
+im && be && pm && ffb && r # install magisk, boot.img extract, patch (boot.img) with magisk, fastboot flash boot, reboot
+
+f && kb && re && mbe && br && ffb && r # fastboot, kernel build, rom extract, boot.img extract, magisk boot.img repack (w/ built kernel), fastboot flash boot.img, reboot
+
+```
+
 # Devcontainer
 
-If you open this project on VSCode, it should build the container and mount itself inside of it and everything should work, but I'm not sure if USB is going to work on macOS and Windows, so I advise using this on a Linux host, so you can use `adb` and `fastboot` inside the container (they are available). So, running everything on a Linux host will give you a plug and play Android hacking environment. Anyways, open this on VSCode, but do `source source_me.sh` when you enter it, I'm working on a way for it to be not needed.
+You can open the template or even this repo on VSCode's devcontainer, where you'll be able to do all the commands. Edit the .devcontainer.json to set your phone.

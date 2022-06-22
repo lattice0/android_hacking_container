@@ -128,6 +128,11 @@ RUN set -ex && sudo mkdir ${ANDROID_HOME} && curl -sSL -o android-sdk.zip ${ANDR
     && sudo chown $USERNAME:$USERNAME $ANDROID_HOME -R
 # ------------------------------------
 
+RUN sudo apt-get update && sudo apt install -y libusb-1.0-0-dev libusb-dev \
+    && git clone https://github.com/Benjamin-Dobell/Heimdall/ && cd Heimdall \
+    && cmake -D DISABLE_FRONTEND=true . \
+    && make && sudo make install
+
 RUN sudo mkdir /opt/entrypoint && \ 
     TEMPD=$(mktemp -d) && \   
     echo "#!/bin/sh\n\

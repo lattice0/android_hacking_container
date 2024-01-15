@@ -27,6 +27,12 @@ function ke() {
     (cd $SCRIPT_DIR/devices/$DEVICE/kernel; ./kernel_extract.sh)
 }
 
+# Kernel Patch
+function kp() {
+    fail_if_no_device
+    (cd $SCRIPT_DIR/devices/$DEVICE/kernel; ./kernel_patch.sh)
+}
+
 # Kernel Build
 function kb() {
     fail_if_no_device
@@ -255,6 +261,7 @@ Commands:
  kd                      downloads the kernel
  ke                      extracts the kernel
  kb                      builds the kernel
+ kp                      applies patches to the kernel
  rd                      rom download
  re                      rom extrack
  be                      boot.img (from ROM) extract 

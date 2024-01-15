@@ -3,6 +3,8 @@ kernel/*
 !kernel/kernel_build.sh
 !kernel/kernel_download.sh
 !kernel/kernel_extract.sh
+!kernel/kernel_patch.sh
+
 rom/*
 !rom/rom_download.sh
 aosp/*
